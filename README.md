@@ -1,2 +1,2 @@
-# Shrederr
+# Shreddr
 Simple File shredder
