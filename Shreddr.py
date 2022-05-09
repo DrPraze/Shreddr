@@ -3,6 +3,7 @@ from tkinter import ttk
 from ttkbootstrap import Style, widgets
 from tkinter.filedialog import askdirectory, askopenfilename
 from tkinter.messagebox import showerror, showinfo
+import string, os
 
 style = Style(theme = "darkly")
 win = style.master
@@ -11,7 +12,7 @@ win.geometry('300x300')
 win.resizable(False, False)
 
 def GUI():
-	# global entry1, entry2, passes, max_filename
+	# global entry, entry2, passes, max_filename
 	
 	folder_frame= ttk.LabelFrame(win, text = "Select Folder", width = 248, height = 50)
 	folder_frame.place(x = 25, y = 1)
@@ -42,19 +43,19 @@ def GUI():
 	max_filename_spin.place(x = 80, y = 20)
 
 	Btn = ttk.Button(win, text = "Shred", style = "primary.Outline.TButton",
-		command = lambda :[shred()])
+		command = lambda :[shred(entry, entry2, passes, max_filename)])
 	Btn.place(x = 125, y = 230)
 
 
-def shred():
-	if entry1.get() == "":
+def shred(entry, entry2, passes, max_filename):
+	if entry.get() == "":
 		if entry2.get()=="":
 			showerror("Error", "Fields are empty")
 		else:
-			shred_file(path=entry2.get(), passes = passes, max_filename = max_filename)
+			shred_file(path=entry2.get(), passes = passes.get(), max_filename = max_filename.get())
 			showinfo("Success", "The shred was Successful")			
 	else:
-		shred_file(path=entry1.get(), passes = passes, max_filename = max_filename)
+		shred_file(path=entry.get(), passes = passes.get(), max_filename = max_filename.get())
 		showinfo("Success", "The shred was Successful")
 
 def Open(entry):
@@ -95,5 +96,5 @@ def shred_file(path : str, passes : int, max_filename : int):
 
 # if __name__=='__main__':
 GUI()
-print(entry1)
+# print(entry)
 win.mainloop()
